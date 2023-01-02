@@ -1,0 +1,57 @@
+﻿@page
+@model examen_2ev.Pages.CRUD.InsertNotas2.InsertNotasModel
+
+@{
+    ViewData["Title"] = "InsertNotas";
+}
+
+<h2 style="text-align:center">Insertar una nueva nota</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="NotaDTO.Cod_alumno1" class="control-label"></label>
+                <input asp-for="NotaDTO.Cod_alumno1" class="form-control" />
+                <span asp-validation-for="NotaDTO.Cod_alumno1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NotaDTO.Nota_evaluacion1" class="control-label"></label>
+                <input asp-for="NotaDTO.Nota_evaluacion1" class="form-control" />
+                <span asp-validation-for="NotaDTO.Nota_evaluacion1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NotaDTO.Cod_evaluacion1" class="control-label"></label>
+                <select asp-for="NotaDTO.Cod_evaluacion1" class ="form-control" asp-items="ViewBag.Cod_evaluacion"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" onclick="verificarNota()" asp-page-handler="OnPostAsync" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function verificarNota() {
+            //Obtengo el valor del campo nota
+            var nota = document.getElementById('NotaEv').value;
+
+            //Miro si la contraseña cumple los requisitos
+            if (nota < 0 || nota > 10) {
+                //Mensage de error
+                alert("La nota debe estar en el rango 0-10");
+                //Reseteo el campo
+                nota.value = 0;
+                //Muevo el cursor al campo
+                nota.focus();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,81 @@
+﻿@page
+@model examen_2ev.Pages.CRUD.SelectNotas.SelectNotasModel
+
+@{
+    ViewData["Title"] = "SelectNotas";
+}
+
+<h2 style="text-align:center">Consultar Notas por Código de Alumno</h2>
+
+<form method="post" id="myForm1">
+    <div class="letters">
+        <br /><br />
+
+        <div class="form-group row">
+            <div class="col-sm-4 col-form-label"></div>
+            <div class="col-sm-4 col-form-label">Consultar alumno por codigo</div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-4 col-form-label"></div>
+            <div class="col-sm-4">
+                <input class="form-control" id="codAlumn" name="Cod_alumno" placeholder="HYJ33" required>
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary" asp-page-handler="OnPostAsync">Consultar</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaNotas[0].Md_uuid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaNotas[0].Md_fch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaNotas[0].Cod_alumno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaNotas[0].Nota_evaluacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaNotas[0].Evaluacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @if(Model.ListaNotas != null){
+            @foreach (var item in Model.ListaNotas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Md_uuid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Md_fch)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cod_alumno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nota_evaluacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Evaluacion.Cod_evaluacion)
+                    </td>
+                </tr>
+            }
+    }
+    </tbody>
+</table>
